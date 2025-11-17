@@ -1,0 +1,4 @@
+2025-11-17 10:29:21 +05:30: 🚑 SOS API server is running on http://localhost:3001
+2025-11-17 10:29:21 +05:30: 📊 Health check: http://localhost:3001/health
+2025-11-17 10:29:21 +05:30: 🚨 Ambulances: http://localhost:3001/api/ambulances
+2025-11-17 10:29:21 +05:30: 👨‍⚕️ Doctors: http://localhost:3001/api/doctors

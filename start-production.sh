@@ -115,11 +115,11 @@ mkdir -p "$SCRIPT_DIR/logs"
 pm2 start npm \
     --name sos-frontend \
     --cwd "$SCRIPT_DIR/frontend" \
-    -- run serve \
     --log-date-format "YYYY-MM-DD HH:mm:ss Z" \
     --merge-logs \
     --error "$SCRIPT_DIR/logs/frontend-error.log" \
-    --output "$SCRIPT_DIR/logs/frontend-out.log"
+    --output "$SCRIPT_DIR/logs/frontend-out.log" \
+    -- run serve
 
 cd ..
 
