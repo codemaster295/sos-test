@@ -88,16 +88,19 @@ pm2 delete sos-backend sos-frontend 2>/dev/null || true
 # Step 4: Start Backend with PM2
 print_info "Starting backend with PM2..."
 cd backend
+
+# Create logs directory if it doesn't exist
+mkdir -p "$SCRIPT_DIR/logs"
+
 pm2 start dist/index.js \
     --name sos-backend \
     --cwd "$SCRIPT_DIR/backend" \
-    --env production \
     --instances 1 \
-    --exec-mode fork \
     --log-date-format "YYYY-MM-DD HH:mm:ss Z" \
     --merge-logs \
     --error "$SCRIPT_DIR/logs/backend-error.log" \
-    --output "$SCRIPT_DIR/logs/backend-out.log"
+    --output "$SCRIPT_DIR/logs/backend-out.log" \
+    --env production
 
 cd ..
 
@@ -108,11 +111,11 @@ cd frontend
 # Create logs directory if it doesn't exist
 mkdir -p "$SCRIPT_DIR/logs"
 
-# Start frontend with PM2 using npx serve (works even if serve is not globally installed)
-pm2 start npx \
+# Start frontend with PM2 using npm run serve (which uses npx serve)
+pm2 start npm \
     --name sos-frontend \
     --cwd "$SCRIPT_DIR/frontend" \
-    -- serve dist -l 3000 -s \
+    -- run serve \
     --log-date-format "YYYY-MM-DD HH:mm:ss Z" \
     --merge-logs \
     --error "$SCRIPT_DIR/logs/frontend-error.log" \

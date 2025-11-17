@@ -8,7 +8,6 @@ module.exports = {
       script: './backend/dist/index.js',
       cwd: './backend',
       instances: 1,
-      exec_mode: 'fork',
       env: {
         NODE_ENV: 'production',
         PORT: 3001,
@@ -23,8 +22,8 @@ module.exports = {
     },
     {
       name: 'sos-frontend',
-      script: 'npx',
-      args: 'serve -s dist -l 3000',
+      script: 'npm',
+      args: 'run serve',
       cwd: './frontend',
       env: {
         NODE_ENV: 'production',
