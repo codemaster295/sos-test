@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { Ambulance, Doctor, PaginatedResponse, LoginRequest, RegisterRequest, AuthResponse, User } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+// const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  // baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -47,27 +47,27 @@ export const ambulanceApi = {
     radius?: number;
     search?: string;
   }): Promise<PaginatedResponse<Ambulance>> => {
-    const response = await api.get<PaginatedResponse<Ambulance>>('/ambulances', { params });
+    const response = await api.get<PaginatedResponse<Ambulance>>('/api/ambulances', { params });
     return response.data;
   },
 
   getById: async (id: number): Promise<Ambulance> => {
-    const response = await api.get<Ambulance>(`/ambulances/${id}`);
+    const response = await api.get<Ambulance>(`/api/ambulances/${id}`);
     return response.data;
   },
 
   create: async (ambulance: Omit<Ambulance, 'id' | 'createdAt' | 'updatedAt'>): Promise<Ambulance> => {
-    const response = await api.post<Ambulance>('/ambulances', ambulance);
+    const response = await api.post<Ambulance>('/api/ambulances', ambulance);
     return response.data;
   },
 
   update: async (id: number, ambulance: Partial<Ambulance>): Promise<Ambulance> => {
-    const response = await api.put<Ambulance>(`/ambulances/${id}`, ambulance);
+    const response = await api.put<Ambulance>(`/api/ambulances/${id}`, ambulance);
     return response.data;
   },
 
   delete: async (id: number): Promise<void> => {
-    await api.delete(`/ambulances/${id}`);
+    await api.delete(`/api/ambulances/${id}`);
   },
 };
 
@@ -81,44 +81,44 @@ export const doctorApi = {
     radius?: number;
     search?: string;
   }): Promise<PaginatedResponse<Doctor>> => {
-    const response = await api.get<PaginatedResponse<Doctor>>('/doctors', { params });
+    const response = await api.get<PaginatedResponse<Doctor>>('/api/doctors', { params });
     return response.data;
   },
 
   getById: async (id: number): Promise<Doctor> => {
-    const response = await api.get<Doctor>(`/doctors/${id}`);
+    const response = await api.get<Doctor>(`/api/doctors/${id}`);
     return response.data;
   },
 
   create: async (doctor: Omit<Doctor, 'id' | 'createdAt' | 'updatedAt'>): Promise<Doctor> => {
-    const response = await api.post<Doctor>('/doctors', doctor);
+    const response = await api.post<Doctor>('/api/doctors', doctor);
     return response.data;
   },
 
   update: async (id: number, doctor: Partial<Doctor>): Promise<Doctor> => {
-    const response = await api.put<Doctor>(`/doctors/${id}`, doctor);
+    const response = await api.put<Doctor>(`/api/doctors/${id}`, doctor);
     return response.data;
   },
 
   delete: async (id: number): Promise<void> => {
-    await api.delete(`/doctors/${id}`);
+    await api.delete(`/api/doctors/${id}`);
   },
 };
 
 // Auth APIs
 export const authApi = {
   login: async (credentials: LoginRequest): Promise<AuthResponse> => {
-    const response = await api.post<AuthResponse>('/auth/login', credentials);
+    const response = await api.post<AuthResponse>('/api/auth/login', credentials);
     return response.data;
   },
 
   register: async (userData: RegisterRequest): Promise<AuthResponse> => {
-    const response = await api.post<AuthResponse>('/auth/register', userData);
+    const response = await api.post<AuthResponse>('/api/auth/register', userData);
     return response.data;
   },
 
   getCurrentUser: async (): Promise<User> => {
-    const response = await api.get<User>('/auth/me');
+    const response = await api.get<User>('/api/auth/me');
     return response.data;
   },
 };
