@@ -265,6 +265,81 @@ npm test
 - SQL injection protection via parameterized queries
 - XSS protection via React's built-in escaping
 
+## 🚀 Production Deployment
+
+### Using PM2 (Recommended)
+
+The project includes scripts for production deployment using PM2:
+
+1. **Start Production:**
+   ```bash
+   ./start-production.sh
+   ```
+
+   This script will:
+   - Build both backend and frontend
+   - Start backend on port 3001
+   - Start frontend on port 3000
+   - Manage processes with PM2
+
+2. **Stop Production:**
+   ```bash
+   ./stop-production.sh
+   ```
+
+3. **Restart Production:**
+   ```bash
+   ./restart-production.sh
+   ```
+
+4. **Using PM2 Ecosystem Config:**
+   ```bash
+   # Build both projects first
+   cd backend && npm run build && cd ..
+   cd frontend && npm run build && cd ..
+   
+   # Start with ecosystem config
+   pm2 start ecosystem.config.js
+   ```
+
+### PM2 Commands
+
+```bash
+# View logs
+pm2 logs
+
+# View specific app logs
+pm2 logs sos-backend
+pm2 logs sos-frontend
+
+# Monitor processes
+pm2 monit
+
+# Restart all
+pm2 restart all
+
+# Stop all
+pm2 stop all
+
+# Delete all
+pm2 delete all
+
+# Save current process list
+pm2 save
+
+# Setup PM2 to start on system boot
+pm2 startup
+pm2 save
+```
+
+### Prerequisites for Production
+
+- PM2 installed globally: `npm install -g pm2`
+- Environment variables configured in `.env` files
+- Database seeded with initial data
+
+**Note**: The script uses `npx serve` for the frontend, so no global installation of `serve` is required.
+
 ## 📄 License
 
 This project is created for a coding challenge.
